@@ -8,26 +8,17 @@ class HttpServerImpl(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-
     def do_GET(self):
-
         self.set_headers()
-        self.wfile.write('<h1>Hello world!</h1>')
+        message = "Hello world!"
+        self.wfile.write(bytes(message,encoding='utf-8'))
 
 
-
-
-def run(server_class=HTTPServer, handler_class=HttpServerImpl, port=8989):
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
+def run():
+    server_address = ('127.0.0.1', 8989)
+    httpd = HTTPServer(server_address, HttpServerImpl)
     print("Served for requests")
     httpd.serve_forever()
 
 
-if __name__ == '__main__':
-    from sys import argv
-
-    if len(argv) == 2:
-        run(port=int(argv[1]))
-    else:
-        run()
+run()
