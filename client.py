@@ -4,7 +4,7 @@ from queue import Queue
 
 
 
-def get(q, msg):
+def get(queue, msg):
         q = Queue()
         host = 'localhost'
         connection = http.client.HTTPConnection(host, 8989)
