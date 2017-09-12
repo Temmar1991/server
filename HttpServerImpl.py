@@ -1,6 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from queue import Queue, Full, Empty
 
+
 q = Queue(10)
 
 
