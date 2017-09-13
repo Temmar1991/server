@@ -65,10 +65,14 @@ def server_parser():
 def run(namespace):
 
     server_address = ('127.0.0.1', namespace.port)
-    httpd = HTTPServer(server_address, HttpServerImpl)
-    print("Served for requests...")
     try:
+        httpd = HTTPServer(server_address, HttpServerImpl)
+        print("Served for requests...")
         httpd.serve_forever()
+    except OSError:
+        print("Address already in use!")
+    except PermissionError:
+        print("Permission denied")
     except KeyboardInterrupt:
         pass
         httpd.server_close()

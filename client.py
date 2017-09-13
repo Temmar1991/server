@@ -3,7 +3,7 @@ import requests
 import json
 import sys
 # Port must be known
-url = 'http://127.0.0.1:9000'
+url = 'http://127.0.0.1:80'
 
 def do_get(namespace=None):
         data = {'queue': namespace.queue}
@@ -22,9 +22,8 @@ def do_post(namespace):
         headers = {'content-type': 'application/json'}
         data = {'message': namespace.message, 'queue': namespace.queue}
         requests.post(url, data=json.dumps(data), headers=headers)
+        # print(req.status_code, req.reason)
         print('[Done]')
-    # print(req.status_code, req.reason)
-    # print('[Done]')
 
 
 def cli():
@@ -51,6 +50,7 @@ if __name__ == '__main__':
             do_get(namespace)
         elif namespace.command == "post":
             do_post(namespace)
+
         else:
             print("Something goes wrong")
 
