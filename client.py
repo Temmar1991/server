@@ -15,15 +15,16 @@ def do_get(namespace=None):
         if not msg:
             print('Queue empty')
         else:
-            print("The item is {}".format(msg))
+            print("The message is {}".format(msg))
 
 
 def do_post(namespace):
-    headers = {'content-type': 'application/json'}
-    data = {'message': namespace.message, 'queue': namespace.queue}
-    req = requests.post(url, data=json.dumps(data), headers=headers)
+        headers = {'content-type': 'application/json'}
+        data = {'message': namespace.message, 'queue': namespace.queue}
+        requests.post(url, data=json.dumps(data), headers=headers)
+        print('[Done]')
     # print(req.status_code, req.reason)
-    print('[Done]')
+    # print('[Done]')
 
 
 def cli():

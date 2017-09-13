@@ -6,7 +6,7 @@ import json
 
 
 queues = {q: Queue(10) for q in range(0, 11)}
-print(queues)
+# print(queues)
 
 
 class HttpServerImpl(BaseHTTPRequestHandler):
@@ -20,11 +20,11 @@ class HttpServerImpl(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         data = self.rfile.read(content_length)
         decode_data = data.decode(encoding='utf-8')
-        print(data)
+        # print(data)
         request_json_data1 = json.loads(decode_data)
         queue = request_json_data1['queue']
         num_queue = int(queue)
-        print(queue)
+        # print(queue)
         self.set_headers()
         try:
             item = queues[num_queue].get(False)
@@ -43,8 +43,8 @@ class HttpServerImpl(BaseHTTPRequestHandler):
             message = request_json_data['message']
             num_queue = request_json_data['queue']
             num_queue_number = int(num_queue)
-            print(message)
-            print(num_queue)
+            # print(message)
+            # print(num_queue)
             # print(request_json_data['queue'])
             self.set_headers()
             try:
@@ -56,7 +56,7 @@ class HttpServerImpl(BaseHTTPRequestHandler):
                 print('Queue is full')
 
 
-def server_paeser():
+def server_parser():
     parser = argparse.ArgumentParser(description='server')
     parser.add_argument('--port', required=True, help='Server port to run', type=int)
     return parser
@@ -76,6 +76,6 @@ def run(namespace):
 
 
 if __name__ == '__main__':
-    parse = server_paeser()
+    parse = server_parser()
     namespace = parse.parse_args()
     run(namespace)
